@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard de Sensores IoT</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <div class="header-content">
+                    <h1 class="title">
+                        <i class="fas fa-microchip"></i>
+                        Dashboard de Sensores IoT
+                    </h1>
+                    <div class="status-indicator">
+                        <div class="status-dot" id="connectionStatus"></div>
+                        <span id="statusText">Conectando...</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="cards-grid">
+                    <!-- Card Umidade do Solo -->
+                    <div class="sensor-card soil-humidity">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3 class="card-title">Umidade do Solo</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="sensor-value">
+                                <span class="value" id="soilHumidity">--</span>
+                                <span class="unit"></span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="soilProgress"></div>
+                            </div>
+                            <div class="sensor-status" id="soilStatus">Aguardando dados...</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="last-update">Última atualização: <span id="soilLastUpdate">--</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Card Umidade do Ar -->
+                    <div class="sensor-card air-humidity">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <h3 class="card-title">Umidade do Ar</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="sensor-value">
+                                <span class="value" id="airHumidity">--</span>
+                                <span class="unit">%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="airHumidityProgress"></div>
+                            </div>
+                            <div class="sensor-status" id="airHumidityStatus">Aguardando dados...</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="last-update">Última atualização: <span id="airHumidityLastUpdate">--</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Card Temperatura do Ar -->
+                    <div class="sensor-card temperature">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <h3 class="card-title">Temperatura do Ar</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="sensor-value">
+                                <span class="value" id="airTemperature">--</span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="temperatureProgress"></div>
+                            </div>
+                            <div class="sensor-status" id="temperatureStatus">Aguardando dados...</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="last-update">Última atualização: <span id="temperatureLastUpdate">--</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Card Índice de Calor -->
+                    <div class="sensor-card heat-index">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3 class="card-title">Índice de Calor</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="sensor-value">
+                                <span class="value" id="heatIndex">--</span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="heatIndexProgress"></div>
+                            </div>
+                            <div class="sensor-status" id="heatIndexStatus">Aguardando dados...</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="last-update">Última atualização: <span id="heatIndexLastUpdate">--</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção de Histórico -->
+                <div class="history-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        Histórico de Dados
+                    </h2>
+                    <div class="history-controls">
+                        <button class="btn btn-primary" id="clearHistory">
+                            <i class="fas fa-trash"></i>
+                            Limpar Histórico
+                        </button>
+                        <button class="btn btn-secondary" id="exportData">
+                            <i class="fas fa-download"></i>
+                            Exportar Dados
+                        </button>
+                    </div>
+                    <div class="history-table-container">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Horário</th>
+                                    <th>Umidade Solo</th>
+                                    <th>Umidade Ar (%)</th>
+                                    <th>Temperatura (°C)</th>
+                                    <th>Índice Calor (°C)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- Dados serão inseridos dinamicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <p>&copy; 2024 Dashboard de Sensores IoT - Desenvolvido com Firebase</p>
+            </footer>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Conectando ao Firebase...</p>
+            </div>
+        </div>
+
+        <!-- Firebase SDK -->
+        <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+        <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+        <!-- JavaScript principal -->
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

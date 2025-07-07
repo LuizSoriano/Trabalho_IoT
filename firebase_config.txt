@@ -1,0 +1,3 @@
+Web_API_KEY: AIzaSyBtMCMn03EFZFhrrppsRA69g_6awF7F0b8
+DATABASE_URL: https://projetoiot-cd352-default-rtdb.firebaseio.com/
+
